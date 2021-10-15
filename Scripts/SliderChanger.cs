@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(PlayerHealth))]
 
@@ -13,27 +12,25 @@ public class SliderChanger : MonoBehaviour
     private PlayerHealth _health;
     private float _value; 
 
-    private void Start()
-    {
-        _health = gameObject.GetComponent<PlayerHealth>();
-
-        _health.Increased += Increase;
-        _health.Decreased += Decrease;
-    }
-
     private void Update() 
     {        
         float maxDelta = 10f;
         _slider.value = Mathf.MoveTowards(_slider.value, _value, maxDelta * Time.deltaTime);
     }
 
-    public void Increase()
+    private void Change()
     {
-        _value += 10;
+        _value = _health.Current;
     }
 
-    public void Decrease()
+    private void OnEnable()
     {
-        _value -= 10;
+        _health = GetComponent<PlayerHealth>();
+        _health.SliderChanger += Change;
+    }
+
+    private void OnDisable()
+    {
+        _health.SliderChanger -= Change;
     }
 }

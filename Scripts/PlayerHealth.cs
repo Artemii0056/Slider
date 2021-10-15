@@ -7,22 +7,25 @@ public class PlayerHealth : MonoBehaviour
 {
     private float _current = 0;
 
-    public delegate void SendHealthInfo();
+    [SerializeField] private UnityEvent _sliderChanger;
 
-    public event SendHealthInfo Increased;
-    public event SendHealthInfo Decreased;
+    public event UnityAction SliderChanger
+    {
+        add => _sliderChanger.AddListener(value);
+        remove => _sliderChanger.RemoveListener(value);
+    }
 
     public float Current => _current;
 
     public void OnButtonClickDecrease()
     {
         _current -= 10f;
-        Decreased();
+        _sliderChanger?.Invoke();
     }
 
     public void OnButtonClickIncrease()
     {
         _current += 10f;
-        Increased();      
+        _sliderChanger?.Invoke();    
     }
 }

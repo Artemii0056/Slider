@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public class PlayerHealth : MonoBehaviour
 {
-    public event UnityAction HealthChanged;
-
     private float _current = 0;
-
     public float Current => _current;
+
+    public event UnityAction HealthChanged;
 
     public void OnButtonClickDecrease()
     {

@@ -14,12 +14,28 @@ public class PlayerHealth : MonoBehaviour
     public void OnButtonClickDecrease()
     {
         _current -= 10f;
-        HealthChanged?.Invoke();
+
+        if (_current < 0)
+        {
+            _current = 0;     
+        }
+        else
+        {
+            HealthChanged?.Invoke();
+        }
     }
 
     public void OnButtonClickIncrease()
     {
         _current += 10f;
-        HealthChanged?.Invoke();    
+
+        if (_current > 100)
+        {
+            _current = 100;
+        }
+        else
+        {
+            HealthChanged?.Invoke();
+        }
     }
 }

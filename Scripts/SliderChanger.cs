@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(PlayerHealth))]
+[RequireComponent(typeof(Health))]
 
 public class SliderChanger : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
-    [SerializeField] private PlayerHealth _player;
+    [SerializeField] private Health _player;
 
     private bool isCoroutineWorking = false;
 
@@ -36,7 +36,7 @@ public class SliderChanger : MonoBehaviour
 
         while (_slider.value != _player.Current)
         {
-            float maxDelta = 10f;
+            float maxDelta = 20f;
             _slider.value = Mathf.MoveTowards(_slider.value, _player.Current, maxDelta * Time.deltaTime);
             yield return null;
         }

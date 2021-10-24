@@ -7,8 +7,8 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     private float _current = 0;
-    private float _increase = 35f; //
-    private float _decrease = 35f; //
+    private float _increase = 10f; 
+    private float _decrease = 10f; 
     private float _max = 100;
     private float _min = 0;
 

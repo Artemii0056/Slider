@@ -3,34 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Health))]
+[RequireComponent(typeof(PlayerHealth))]
 
 public class SliderChanger : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
-    [SerializeField] private Health _player;
+    [SerializeField] private PlayerHealth _player;
 
     private bool isCoroutineWorking = false;
 
     private void OnEnable()
     {
-        _player.HealthChanged += OnSliderChanger;
+        _player.HealthChanged += OnHealthChanged;
     }
 
     private void OnDisable()
     {
-        _player.HealthChanged -= OnSliderChanger;
+        _player.HealthChanged -= OnHealthChanged;
     }
 
-    private void OnSliderChanger()
+    private void OnHealthChanged()
     {
         if (isCoroutineWorking == false)
         {
-            var changerJob = StartCoroutine(Changer());
+            var changerJob = StartCoroutine(ChangeSlider());
         }
     }
 
-    private IEnumerator Changer()
+    private IEnumerator ChangeSlider()
     {
         isCoroutineWorking = true;
 
